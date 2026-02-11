@@ -11,7 +11,7 @@ const setupEventHandlers = (redisSubscriber, mqttClient, io) => {
       const targetTopic = `parkfinder/control/${payload.slotName}`;
       let mqttMessage = '';
 
-switch (payload.action) {
+      switch (payload.action) {
         case 'reserveSlot': mqttMessage = 'setReserved'; break;
         case 'occupySlot': mqttMessage = 'setOccupied'; break;
         case 'leaveSlot': 
@@ -27,7 +27,7 @@ switch (payload.action) {
       }
     } catch (err) {
       console.error('[RedisError]', err);
-    }
+        }
   });
 
   // listen mqtt
