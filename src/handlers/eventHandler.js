@@ -11,17 +11,19 @@ const setupEventHandlers = (redisSubscriber, mqttClient, io) => {
       const targetTopic = `parkfinder/control/${payload.slotName}`;
       let mqttMessage = '';
 
-      switch (payload.action) {
-        case 'reserveSlot': mqttMessage = 'LedYellowOn'; break;
-        case 'occupySlot': mqttMessage = 'LedRedOn'; break;
-        case 'leaveSlot': mqttMessage = 'LedGreenOn'; break;
-        case 'cancelSlot': mqttMessage = 'LedGreenOn'; break;
-        case 'maintenanceSlot': mqttMessage = 'LedRedBlink'; break;
+switch (payload.action) {
+        case 'reserveSlot': mqttMessage = 'setReserved'; break;
+        case 'occupySlot': mqttMessage = 'setOccupied'; break;
+        case 'leaveSlot': 
+        case 'cancelSlot': 
+          mqttMessage = 'setAvailable'; break;
+        case 'maintenanceSlot': mqttMessage = 'setOccupied'; break;
+        case 'alertSlot': mqttMessage = 'buzzerOn'; break;
       }
 
       if (mqttMessage) {
         mqttClient.publish(targetTopic, mqttMessage);
-        io.emit('updateDenah', payload);
+        io.emit('updateMap', payload);
       }
     } catch (err) {
       console.error('[RedisError]', err);
