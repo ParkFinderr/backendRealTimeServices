@@ -14,6 +14,7 @@ const setupEventHandlers = (redisSubscriber, mqttClient, io) => {
       switch (payload.action) {
         case 'reserveSlot': mqttMessage = 'LedYellowOn'; break;
         case 'occupySlot': mqttMessage = 'LedRedOn'; break;
+        case 'leaveSlot': mqttMessage = 'LedGreenOn'; break;
         case 'cancelSlot': mqttMessage = 'LedGreenOn'; break;
         case 'maintenanceSlot': mqttMessage = 'LedRedBlink'; break;
       }
