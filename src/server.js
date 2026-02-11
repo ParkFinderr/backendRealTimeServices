@@ -12,7 +12,7 @@ const { setupEventHandlers } = require('./handlers/eventHandler');
 
 const startServer = async () => {
   try {
-    console.log('[INIT] Starting Realtime Service...');
+    console.log('Starting Realtime Service...');
 
     const app = express();
 
@@ -37,7 +37,7 @@ const startServer = async () => {
     });
 
   } catch (error) {
-    console.error('[FATAL ERROR]', error);
+    console.error('[FatalError]', error);
     process.exit(1);
   }
 };
