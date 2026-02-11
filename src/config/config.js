@@ -5,5 +5,5 @@ module.exports = {
   redisHost: process.env.REDIS_HOST,
   port: process.env.PORT || 3000,
   mqttTopicSensor: 'parkfinder/sensor/#',
-  redisChannelCmd: 'parkfinder-commands'
+  redisChannelCmd: 'parkfinderCommands'
 };
