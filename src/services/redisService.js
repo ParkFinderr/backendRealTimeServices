@@ -7,7 +7,7 @@ const initRedis = async () => {
   subscriber.on('error', (err) => console.error('[REDIS ERROR]', err));
   
   await subscriber.connect();
-  console.log('✅ Terhubung ke Redis Subscriber');
+  console.log('Terhubung ke Redis Subscriber');
   
   return subscriber;
 };
