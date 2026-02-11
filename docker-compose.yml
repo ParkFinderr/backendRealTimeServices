@@ -4,7 +4,7 @@ services:
 
   mqtt:
     image: eclipse-mosquitto:latest
-    container_name: parkfinder_mqtt
+    containerName: parkfinderMqtt
     ports:
       - "1883:1883"     
       - "9001:9001" 
@@ -16,7 +16,7 @@ services:
 
   redis:
     image: redis:alpine
-    container_name: parkfinder_redis
+    containerName: parkfinderRedis
     ports:
       - "6379:6379"    
     volumes:
@@ -26,7 +26,7 @@ services:
 
   app:
     build: .           
-    container_name: parkfinder_realtime
+    containerName: parkfinderRealtime
     ports:
   
       - "3001:3000"      
