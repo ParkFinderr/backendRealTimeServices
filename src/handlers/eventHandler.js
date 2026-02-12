@@ -24,9 +24,11 @@ const setupEventHandlers = (redisSubscriber, mqttClient, io) => {
         case 'occupySlot': mqttMessage = 'setOccupied'; break;
    
         case 'leaveSlot': 
-        case 'cancelSlot': mqttMessage = 'setAvailable'; break;
+        case 'cancelSlot': 
+        case 'freeSlot':
+        mqttMessage = 'setAvailable'; break;
    
-        case 'maintenanceSlot': mqttMessage = 'setOccupied'; break; 
+        case 'maintenanceSlot': mqttMessage = 'setMaintenance'; break; 
   
         case 'alertSlot': mqttMessage = 'buzzerOn'; break;
       }
