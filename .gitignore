@@ -1,3 +1,7 @@
 node_modules
 package-lock.json
 .env
+
+mosquitto\data\mosquitto.db
+redis\data\dump.rdb
+redis\data\appendonlydir\appendonly.aof.manifest
