@@ -1,13 +1,12 @@
 version: '3.8'
 
 services:
-
   mqtt:
     image: eclipse-mosquitto:latest
     container_name: parkfinderMqtt
     ports:
-      - "1883:1883"     
-      - "9001:9001" 
+      - "1883:1883"
+      - "9001:9001"
     volumes:
       - ./mosquitto/config:/mosquitto/config
       - ./mosquitto/data:/mosquitto/data
@@ -18,22 +17,25 @@ services:
     image: redis:alpine
     container_name: parkfinderRedis
     ports:
-      - "6379:6379"    
+      - "6379:6379"
     volumes:
       - ./redis/data:/data
     command: redis-server --appendonly yes
     restart: unless-stopped
 
   app:
-    build: .           
+    build: .
     container_name: parkfinderRealtime
     ports:
-  
-      - "3001:3000"      
+      - "${PORT}:${PORT}"
+    
+    env_file:
+      - .env
     environment:
-      - PORT=3000
-      - MQTT_HOST=mqtt  
+      - PORT=${PORT}
+      - MQTT_HOST=mqtt 
       - REDIS_HOST=redis
+    
     depends_on:
       - mqtt
       - redis
