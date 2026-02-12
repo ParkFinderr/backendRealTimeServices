@@ -16,7 +16,7 @@ const startServer = async () => {
 
     const app = express();
 
-    // Middleware
+    // middleware
     app.use(cors());
     app.use(express.json());
     app.use('/', apiRoutes);
@@ -25,7 +25,7 @@ const startServer = async () => {
 
     const redisSubscriber = await initRedis();
     const mqttClient = initMqtt();
-    const io = initSocket(httpServer); // Tempel Socket.io ke server HTTP
+    const io = initSocket(httpServer);
 
     setupEventHandlers(redisSubscriber, mqttClient, io);
 

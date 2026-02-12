@@ -36,6 +36,13 @@ const setupEventHandlers = (redisSubscriber, mqttClient, io) => {
         console.log(`[MQTT OUT] Kirim ke ${targetTopic} : ${mqttMessage}`);
       }
 
+      io.emit('updateMap', {
+            slotName: payload.slotName,
+            action: payload.action,
+            status: payload.status
+        }
+      );
+
     } catch (error) {
       console.error('[REDIS ERROR] Gagal parse pesan:', error);
     }
