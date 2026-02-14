@@ -31,9 +31,9 @@ const startServer = async () => {
 
     httpServer.listen(config.port, () => {
       console.log(`Realtime Service berjalan di Port ${config.port}`);
-      console.log(`   - HTTP API: Ready`);
-      console.log(`   - WebSocket: Ready`);
-      console.log(`   - MQTT Bridge: Ready`);
+      console.log(`HTTP API: Ready`);
+      console.log(`WebSocket: Ready`);
+      console.log(`MQTT Bridge: Ready`);
     });
 
   } catch (error) {

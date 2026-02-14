@@ -43,3 +43,122 @@
 1770805348: Client mqttjs_71e3a6c6 [172.18.0.4:32994] disconnected: connection closed by client.
 1770805349: mosquitto version 2.1.2 terminating
 1770805349: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1770910024: mosquitto version 2.1.2 starting
+1770910024: Config loaded from /mosquitto/config/mosquitto.conf.
+1770910024: Bridge support available.
+1770910024: Persistence support available.
+1770910024: TLS support available.
+1770910024: TLS-PSK support available.
+1770910024: Websockets support available.
+1770910024: Opening ipv4 listen socket on port 1883.
+1770910024: Opening ipv4 listen socket on port 9001.
+1770910024: mosquitto version 2.1.2 running
+1770910025: New connection from 172.18.0.1:41838 on port 1883.
+1770910025: New client connected from 172.18.0.1:41838 as mqtt-explorer-a2c9ad17 (p4, c1, k60).
+1770910027: New connection from 172.18.0.4:52516 on port 1883.
+1770910027: New client connected from 172.18.0.4:52516 as mqttjs_2341c48b (p4, c1, k60).
+1770910110: Client mqttjs_2341c48b [172.18.0.4:52516] disconnected: connection closed by client.
+1770910112: New connection from 172.18.0.4:47630 on port 1883.
+1770910112: New client connected from 172.18.0.4:47630 as mqttjs_4eaa7edd (p4, c1, k60).
+1770911825: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1770913626: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1770915427: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1770916064: New connection from 172.18.0.1:56854 on port 1883.
+1770916064: New connection from 172.18.0.1:56862 on port 1883.
+1770916064: Protocol error from 172.18.0.1:56862: First packet not CONNECT (47).
+1770916064: Client 172.18.0.1 [172.18.0.1:56862] disconnected: protocol error.
+1770916065: Protocol error from 172.18.0.1:56854: First packet not CONNECT (47).
+1770916065: Client 172.18.0.1 [172.18.0.1:56854] disconnected: protocol error.
+1770916065: New connection from 172.18.0.1:56878 on port 1883.
+1770916065: Protocol error from 172.18.0.1:56878: First packet not CONNECT (47).
+1770916065: Client 172.18.0.1 [172.18.0.1:56878] disconnected: protocol error.
+1770916066: New connection from 172.18.0.1:45064 on port 9001.
+1770916066: New connection from 172.18.0.1:45068 on port 9001.
+1770916066: Client 172.18.0.1 [172.18.0.1:45064] disconnected: bad socket read/write: Unknown error
+1770916067: Client 172.18.0.1 [172.18.0.1:45068] disconnected: bad socket read/write: Unknown error
+1770916067: New connection from 172.18.0.1:45074 on port 9001.
+1770916067: Client 172.18.0.1 [172.18.0.1:45074] disconnected: bad socket read/write: Unknown error
+1770916067: New connection from 172.18.0.1:45086 on port 9001.
+1770916067: Client 172.18.0.1 [172.18.0.1:45086] disconnected: bad socket read/write: Unknown error
+1770916072: New connection from 172.18.0.1:45090 on port 9001.
+1770916072: Client 172.18.0.1 [172.18.0.1:45090] disconnected: bad socket read/write: Unknown error
+1770916072: New connection from 172.18.0.1:45092 on port 9001.
+1770916084: New connection from 172.18.0.1:58946 on port 1883.
+1770916084: Protocol error from 172.18.0.1:58946: First packet not CONNECT (47).
+1770916084: Client 172.18.0.1 [172.18.0.1:58946] disconnected: protocol error.
+1770916084: New connection from 172.18.0.1:58948 on port 1883.
+1770916085: Protocol error from 172.18.0.1:58948: First packet not CONNECT (47).
+1770916085: Client 172.18.0.1 [172.18.0.1:58948] disconnected: protocol error.
+1770916085: New connection from 172.18.0.1:58960 on port 1883.
+1770916085: Protocol error from 172.18.0.1:58960: First packet not CONNECT (47).
+1770916085: Client 172.18.0.1 [172.18.0.1:58960] disconnected: protocol error.
+1770916102: Client 172.18.0.1 [172.18.0.1:45092] disconnected: exceeded timeout.
+1770916144: Client mqttjs_4eaa7edd [172.18.0.4:47630] disconnected: connection closed by client.
+1770916144: mosquitto version 2.1.2 terminating
+1770916144: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1770946833: mosquitto version 2.1.2 starting
+1770946833: Config loaded from /mosquitto/config/mosquitto.conf.
+1770946833: Bridge support available.
+1770946833: Persistence support available.
+1770946833: TLS support available.
+1770946833: TLS-PSK support available.
+1770946833: Websockets support available.
+1770946833: Opening ipv4 listen socket on port 1883.
+1770946833: Opening ipv4 listen socket on port 9001.
+1770946833: mosquitto version 2.1.2 running
+1770946835: New connection from 172.18.0.4:40662 on port 1883.
+1770946835: New client connected from 172.18.0.4:40662 as mqttjs_4240bc68 (p4, c1, k60).
+1770947269: New connection from 172.18.0.1:34856 on port 1883.
+1770947269: New client connected from 172.18.0.1:34856 as mqtt-explorer-a2c9ad17 (p4, c1, k60).
+1770948633: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1770950078: Client mqttjs_4240bc68 [172.18.0.4:40662] disconnected: connection closed by client.
+1770950079: mosquitto version 2.1.2 terminating
+1770950079: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1770950148: mosquitto version 2.1.2 starting
+1770950148: Config loaded from /mosquitto/config/mosquitto.conf.
+1770950148: Bridge support available.
+1770950148: Persistence support available.
+1770950148: TLS support available.
+1770950148: TLS-PSK support available.
+1770950148: Websockets support available.
+1770950148: Opening ipv4 listen socket on port 1883.
+1770950148: Opening ipv4 listen socket on port 9001.
+1770950148: mosquitto version 2.1.2 running
+1770950148: New connection from 172.18.0.1:37548 on port 1883.
+1770950148: New client connected from 172.18.0.1:37548 as mqtt-explorer-a2c9ad17 (p4, c1, k60).
+1770950151: New connection from 172.18.0.4:48668 on port 1883.
+1770950151: New client connected from 172.18.0.4:48668 as mqttjs_f14cd888 (p4, c1, k60).
+1770950418: Client mqttjs_f14cd888 [172.18.0.4:48668] disconnected: connection closed by client.
+1770950419: mosquitto version 2.1.2 terminating
+1770950419: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1770990375: mosquitto version 2.1.2 starting
+1770990375: Config loaded from /mosquitto/config/mosquitto.conf.
+1770990375: Bridge support available.
+1770990375: Persistence support available.
+1770990375: TLS support available.
+1770990375: TLS-PSK support available.
+1770990375: Websockets support available.
+1770990375: Opening ipv4 listen socket on port 1883.
+1770990375: Opening ipv4 listen socket on port 9001.
+1770990375: mosquitto version 2.1.2 running
+1770990377: New connection from 172.18.0.4:53816 on port 1883.
+1770990377: New client connected from 172.18.0.4:53816 as mqttjs_3712be76 (p4, c1, k60).
+1770992176: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1770993977: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1770995431: New connection from 172.18.0.1:38912 on port 1883.
+1770995431: New client connected from 172.18.0.1:38912 as mqtt-explorer-a2c9ad17 (p4, c1, k60).
+1770995537: Client mqttjs_3712be76 [172.18.0.4:53816] disconnected: connection closed by client.
+1770995540: New connection from 172.18.0.4:45426 on port 1883.
+1770995540: New client connected from 172.18.0.4:45426 as mqttjs_2127f49b (p4, c1, k60).
+1770995778: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1770995979: Client mqttjs_2127f49b [172.18.0.4:45426] disconnected: connection closed by client.
+1770995981: New connection from 172.18.0.4:60430 on port 1883.
+1770995981: New client connected from 172.18.0.4:60430 as mqttjs_a1365819 (p4, c1, k60).
+1770997578: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1770999379: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1771001180: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1771002981: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1771004782: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1771006088: Client mqttjs_a1365819 [172.18.0.4:60430] disconnected: connection closed by client.
+1771006089: mosquitto version 2.1.2 terminating
+1771006089: Saving in-memory database to /mosquitto/data//mosquitto.db.
