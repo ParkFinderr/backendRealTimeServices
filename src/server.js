@@ -1,44 +1,57 @@
-const express = require('express');
+require('dotenv').config();
 const http = require('http');
-const cors = require('cors');
-const config = require('./config/config');
+const express = require('express');
+const { Server } = require('socket.io');
 
-// Import Routes & Services
-const apiRoutes = require('./routes/apiRoutes');
-const { initRedis } = require('./services/redisService');
-const { initMqtt } = require('./services/mqttService');
-const { initSocket } = require('./services/socketService');
-const { setupEventHandlers } = require('./handlers/eventHandler');
+
+const mqttService = require('./services/mqttService');
+const redisService = require('./services/redisService');
+const mqttHandler = require('./handlers/mqttHandler');
+const redisHandler = require('./handlers/redisHandler');
+const CHANNELS = require('./constants/channels');
+const app = express();
+const server = http.createServer(app);
+
+
+const io = new Server(server, {
+  cors: { origin: '*', methods: ['GET', 'POST'] }
+});
 
 const startServer = async () => {
   try {
-    console.log('Starting Realtime Service...');
+ 
+    const mqttClient = mqttService.connect();
+    const redisSubscriber = await redisService.connectSubscriber();
+    await redisService.connectPublisher(); 
 
-    const app = express();
+    console.log('Seluruh layanan terhubung');
 
-    // middleware
-    app.use(cors());
-    app.use(express.json());
-    app.use('/', apiRoutes);
-
-    const httpServer = http.createServer(app);
-
-    const redisSubscriber = await initRedis();
-    const mqttClient = initMqtt();
-    const io = initSocket(httpServer);
-
-    setupEventHandlers(redisSubscriber, mqttClient, io);
-
-    httpServer.listen(config.port, () => {
-      console.log(`Realtime Service berjalan di Port ${config.port}`);
-      console.log(`HTTP API: Ready`);
-      console.log(`WebSocket: Ready`);
-      console.log(`MQTT Bridge: Ready`);
+    mqttClient.subscribe(CHANNELS.MQTT.SENSOR_SUB);
+    
+    mqttClient.on('message', (topic, message) => {
+      mqttHandler.handleMqttMessage(topic, message, io);
     });
 
-  } catch (error) {
-    console.error('[FatalError]', error);
-    process.exit(1);
+    await redisSubscriber.subscribe(CHANNELS.REDIS.CMD, (message) => {
+        redisHandler.handleRedisMessage(CHANNELS.REDIS.CMD, message, io);
+    });
+    
+    await redisSubscriber.subscribe(CHANNELS.REDIS.STATS, (message) => {
+        redisHandler.handleRedisMessage(CHANNELS.REDIS.STATS, message, io);
+    });
+
+    io.on('connection', (socket) => {
+      console.log(`🔌 Client Connected: ${socket.id}`);
+      socket.on('disconnect', () => console.log(`🔌 Client Disconnected: ${socket.id}`));
+    });
+
+    const PORT = process.env.PORT || 3001;
+    server.listen(PORT, () => {
+      console.log(`✅ Realtime Service running on port ${PORT}`);
+    });
+
+  } catch (err) {
+    console.error('❌ Failed to start server:', err);
   }
 };
 

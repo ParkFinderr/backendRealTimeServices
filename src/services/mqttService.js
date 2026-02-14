@@ -1,19 +1,28 @@
 const mqtt = require('mqtt');
-const config = require('../config/config');
+require('dotenv').config();
 
-const initMqtt = () => {
-  const client = mqtt.connect(`mqtt://${config.mqttHost}:1883`);
+let client = null;
+
+const connect = () => {
+  const host = process.env.MQTT_HOST
+  const port = process.env.MQTT_PORT 
+  
+  client = mqtt.connect(`mqtt://${host}:${port}`);
 
   client.on('connect', () => {
-    console.log('Terhubung ke MQTT Broker');
-    client.subscribe(config.mqttTopicSensor);
+    console.log(`✅ MQTT terhubung  ${host}:${port}`);
   });
 
   client.on('error', (err) => {
-    console.error('[MQTT ERROR]', err);
+    console.error('❌ MQTT Error:', err);
   });
 
   return client;
 };
 
-module.exports = { initMqtt };
+const getClient = () => {
+  if (!client) throw new Error("MQTT Client tidak terhubung");
+  return client;
+};
+
+module.exports = { connect, getClient };
