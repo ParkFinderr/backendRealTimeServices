@@ -21,7 +21,6 @@ const handleRedisMessage = (channel, message, io) => {
     if (channel === CHANNELS.REDIS.CMD) {
       console.log(`[REDIS CMD] ${payload.action} -> ${payload.slotName}`);
 
-      // A. Kirim Perintah ke Alat (MQTT)
       const mqttMsg = getMqttCommand(payload.action);
       if (mqttMsg) {
         const topic = `${CHANNELS.MQTT.CONTROL_PUB_PREFIX}${payload.slotName}`;
