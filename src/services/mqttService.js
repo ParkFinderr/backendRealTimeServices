@@ -8,16 +8,16 @@ const connect = () => {
   const port = process.env.MQTT_PORT
   const url = `mqtt://${host}:${port}`;
 
-  console.log(`[MQTT] Connecting to ${url}...`);
+  console.log(`[MQTT] terhubung ke ${url}...`);
   
   client = mqtt.connect(url);
 
   client.on('connect', () => {
-    console.log(`✅ [MQTT] Connected`);
+    console.log(`[MQTT] Terhubung`);
   });
 
   client.on('error', (err) => {
-    console.error('❌ [MQTT] Error:', err.message);
+    console.error('[MQTT] Error:', err.message);
   });
 
   return client;

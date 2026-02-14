@@ -15,7 +15,7 @@ const connectSubscriber = async () => {
   console.log(`[REDIS SUB] terhubung ke ${url}...`);
   
   subscriber = createClient({ url });
-  subscriber.on('error', (err) => console.error('❌ [REDIS SUB] Error:', err));
+  subscriber.on('error', (err) => console.error('[REDIS SUB] Error:', err));
   
   await subscriber.connect();
   console.log('[REDIS SUB] Terhubung ');
@@ -27,7 +27,7 @@ const connectPublisher = async () => {
   console.log(`[REDIS PUB] terhubung ke ${url}...`);
 
   publisher = createClient({ url });
-  publisher.on('error', (err) => console.error('❌ [REDIS PUB] Error:', err));
+  publisher.on('error', (err) => console.error('[REDIS PUB] Error:', err));
   
   await publisher.connect();
   console.log('[REDIS PUB] terhubung');
