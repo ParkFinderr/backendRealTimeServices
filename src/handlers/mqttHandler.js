@@ -2,7 +2,7 @@ const CHANNELS = require('../constants/channels');
 const redisService = require('../services/redisService');
 
 const handleMqttMessage = async (topic, message, io) => {
- 
+
   if (topic.includes('control')) return;
 
   const msgString = message.toString();
@@ -16,7 +16,8 @@ const handleMqttMessage = async (topic, message, io) => {
 
   try {
     const redisPub = redisService.getPublisher();
-    const slotName = topic.split('/').pop();
+    
+    const slotName = topic.split('/').pop(); 
 
     const sensorPayload = {
       slotName: slotName,
