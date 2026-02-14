@@ -1,7 +1,7 @@
 const CHANNELS = require('../constants/channels');
 const mqttService = require('../services/mqttService');
 
-const getMqttMessage = (action) => {
+const getMqttCommand = (action) => {
   switch (action) {
     case 'reserveSlot': return CHANNELS.MQTT.PAYLOAD.RESERVED;
     case 'occupySlot': return CHANNELS.MQTT.PAYLOAD.OCCUPIED;
@@ -21,7 +21,8 @@ const handleRedisMessage = (channel, message, io) => {
     if (channel === CHANNELS.REDIS.CMD) {
       console.log(`[REDIS CMD] ${payload.action} -> ${payload.slotName}`);
 
-      const mqttMsg = getMqttMessage(payload.action);
+      // A. Kirim Perintah ke Alat (MQTT)
+      const mqttMsg = getMqttCommand(payload.action);
       if (mqttMsg) {
         const topic = `${CHANNELS.MQTT.CONTROL_PUB_PREFIX}${payload.slotName}`;
         mqttClient.publish(topic, mqttMsg);
@@ -37,6 +38,7 @@ const handleRedisMessage = (channel, message, io) => {
       if (payload.action === 'reserveSlot' && payload.expiryTime) {
         io.emit(CHANNELS.SOCKET.TIMER_START, payload);
       }
+
       if (payload.action === 'cancelSlot' && payload.reason === 'timeout') {
         io.emit(CHANNELS.SOCKET.FORCE_RELEASE, {
           slotId: payload.slotId,
