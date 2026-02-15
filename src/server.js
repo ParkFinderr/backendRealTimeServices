@@ -20,20 +20,22 @@ const startServer = async () => {
   try {
     console.log('Memulai realtime service...');
 
-
     const mqttClient = mqttService.connect();
     const redisSubscriber = await redisService.connectSubscriber();
     await redisService.connectPublisher(); 
 
-    mqttClient.subscribe(CHANNELS.MQTT.SENSOR_SUB, (err) => {
-      if (!err) console.log(`Terhubung dengan MQTT: ${CHANNELS.MQTT.SENSOR_SUB}`);
+    const mqttTopic = 'parkfinder/sensor/#'; 
+    
+    mqttClient.subscribe(mqttTopic, (err) => {
+      if (!err) console.log(`Terhubung dengan MQTT Topic: ${mqttTopic}`);
+      else console.error('Gagal subscribe MQTT:', err);
     });
     
     mqttClient.on('message', (topic, message) => {
       mqttHandler.handleMqttMessage(topic, message, io);
     });
 
-
+    // Redis Listeners
     await redisSubscriber.subscribe(CHANNELS.REDIS.CMD, (message) => {
         redisHandler.handleRedisMessage(CHANNELS.REDIS.CMD, message, io);
     });
@@ -45,6 +47,22 @@ const startServer = async () => {
     io.on('connection', (socket) => {
       console.log(`Client Terhubung: ${socket.id}`);
       
+      socket.on('joinArea', (areaId) => {
+          if (areaId) {
+              const roomName = `area_${areaId}`;
+              socket.join(roomName);
+              console.log(`Socket ${socket.id} joined room: ${roomName}`);
+          }
+      });
+
+      socket.on('leaveArea', (areaId) => {
+          if (areaId) {
+              const roomName = `area_${areaId}`;
+              socket.leave(roomName);
+              console.log(`Socket ${socket.id} left room: ${roomName}`);
+          }
+      });
+
       socket.on('disconnect', () => {
         console.log(`Client Terputus: ${socket.id}`);
       });

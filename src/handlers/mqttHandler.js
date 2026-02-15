@@ -17,9 +17,19 @@ const handleMqttMessage = async (topic, message, io) => {
   try {
     const redisPub = redisService.getPublisher();
     
-    const slotName = topic.split('/').pop(); 
+    const parts = topic.split('/');
+    
+    if (parts.length < 4) {
+
+        console.warn(`[MQTT WARNING] Format topik lama terdeteksi: ${topic}. Update alat IoT Anda!`);
+        return; 
+    }
+
+    const areaId = parts[2]; 
+    const slotName = parts[3]; 
 
     const sensorPayload = {
+      areaId: areaId,  
       slotName: slotName,
       value: msgString
     };

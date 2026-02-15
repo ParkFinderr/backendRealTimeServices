@@ -14,6 +14,7 @@ const connect = () => {
 
   client.on('connect', () => {
     console.log(`[MQTT] Terhubung`);
+
   });
 
   client.on('error', (err) => {
