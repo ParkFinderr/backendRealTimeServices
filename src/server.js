@@ -16,6 +16,13 @@ const io = new Server(server, {
   cors: { origin: '*', methods: ['GET', 'POST'] }
 });
 
+app.get('/', (req, res) => {
+  res.status(200).json({ 
+    message: 'ParkFinder Realtime Service Running...', 
+    serverTime: new Date() 
+  });
+});
+
 const startServer = async () => {
   try {
     console.log('Memulai realtime service...');
