@@ -8,7 +8,7 @@ module.exports = {
 
   /// realtime > IoT
   MQTT: {
-    SENSOR_SUB: 'parkfinder/sensor/+',
+    SENSOR_SUB: 'parkfinder/sensor/#',
     CONTROL_PUB_PREFIX: 'parkfinder/control/', 
     PAYLOAD: {
       RESERVED: 'setReserved',
@@ -23,6 +23,8 @@ module.exports = {
   SOCKET: {
     MAP_UPDATE: 'updateMap',          
     TIMER_START: 'bookingTimerStart',  
-    STATS_UPDATE: 'adminStatsUpdate'   
+    STATS_UPDATE: 'adminStatsUpdate',
+    FORCE_RELEASE: 'forceRelease',
+    SENSOR_RAW: 'sensorRaw'       
   }
 };

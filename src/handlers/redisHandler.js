@@ -26,11 +26,10 @@ const handleRedisMessage = (channel, message, io) => {
       
       if (mqttMsg) {
         let topic = '';
-        
         if (payload.areaId) {
-             topic = `${CHANNELS.MQTT.CONTROL_PUB_PREFIX}${payload.areaId}/${payload.slotName}`;
+            topic = `${CHANNELS.MQTT.CONTROL_PUB_PREFIX}${payload.areaId}/${payload.slotName}`;
         } else {
-             topic = `${CHANNELS.MQTT.CONTROL_PUB_PREFIX}${payload.slotName}`;
+            topic = `${CHANNELS.MQTT.CONTROL_PUB_PREFIX}${payload.slotName}`;
         }
         
         mqttClient.publish(topic, mqttMsg);
