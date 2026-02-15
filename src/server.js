@@ -35,7 +35,6 @@ const startServer = async () => {
       mqttHandler.handleMqttMessage(topic, message, io);
     });
 
-    // Redis Listeners
     await redisSubscriber.subscribe(CHANNELS.REDIS.CMD, (message) => {
         redisHandler.handleRedisMessage(CHANNELS.REDIS.CMD, message, io);
     });
@@ -51,7 +50,7 @@ const startServer = async () => {
           if (areaId) {
               const roomName = `area_${areaId}`;
               socket.join(roomName);
-              console.log(`Socket ${socket.id} joined room: ${roomName}`);
+              console.log(`Socket ${socket.id} joined AREA room: ${roomName}`);
           }
       });
 
@@ -59,7 +58,15 @@ const startServer = async () => {
           if (areaId) {
               const roomName = `area_${areaId}`;
               socket.leave(roomName);
-              console.log(`Socket ${socket.id} left room: ${roomName}`);
+              console.log(`Socket ${socket.id} left AREA room: ${roomName}`);
+          }
+      });
+
+      socket.on('joinUser', (userId) => {
+          if (userId) {
+              const roomName = `user_${userId}`;
+              socket.join(roomName);
+              console.log(`Socket ${socket.id} joined USER room: ${roomName}`);
           }
       });
 

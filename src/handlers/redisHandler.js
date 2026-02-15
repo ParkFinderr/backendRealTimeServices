@@ -15,40 +15,65 @@ const getMqttCommand = (action) => {
 
 const handleRedisMessage = (channel, message, io) => {
   try {
-    const payload = JSON.parse(message);
+
+    const payload = JSON.parse(message); 
     const mqttClient = mqttService.getClient();
 
     if (channel === CHANNELS.REDIS.CMD) {
-      console.log(`[REDIS CMD] ${payload.action} -> ${payload.slotName}`);
+      console.log(`[REDIS CMD] ${payload.action} -> ${payload.slotName} (Area: ${payload.areaId})`);
 
       const mqttMsg = getMqttCommand(payload.action);
+      
       if (mqttMsg) {
-        const topic = `${CHANNELS.MQTT.CONTROL_PUB_PREFIX}${payload.slotName}`;
+        let topic = '';
+        
+        if (payload.areaId) {
+             topic = `${CHANNELS.MQTT.CONTROL_PUB_PREFIX}${payload.areaId}/${payload.slotName}`;
+        } else {
+             topic = `${CHANNELS.MQTT.CONTROL_PUB_PREFIX}${payload.slotName}`;
+        }
+        
         mqttClient.publish(topic, mqttMsg);
         console.log(`[MQTT OUT] ${topic}: ${mqttMsg}`);
       }
 
-      io.emit(CHANNELS.SOCKET.MAP_UPDATE, {
-        slotName: payload.slotName,
-        action: payload.action,
-        status: payload.status
-      });
+      if (payload.areaId) {
+          io.to(`area_${payload.areaId}`).emit(CHANNELS.SOCKET.MAP_UPDATE, {
+            slotName: payload.slotName,
+            action: payload.action,
+            status: payload.status,
+            areaId: payload.areaId
+          });
+      } else {
+        
+          io.emit(CHANNELS.SOCKET.MAP_UPDATE, payload);
+      }
 
       if (payload.action === 'reserveSlot' && payload.expiryTime) {
-        io.emit(CHANNELS.SOCKET.TIMER_START, payload);
+         if (payload.areaId) {
+            io.to(`area_${payload.areaId}`).emit(CHANNELS.SOCKET.TIMER_START, payload);
+         }
       }
 
       if (payload.action === 'cancelSlot' && payload.reason === 'timeout') {
-        io.emit(CHANNELS.SOCKET.FORCE_RELEASE, {
-          slotId: payload.slotId,
-          slotName: payload.slotName,
-          message: 'Waktu booking habis.'
-        });
+    
+         if (payload.areaId) {
+             io.to(`area_${payload.areaId}`).emit(CHANNELS.SOCKET.FORCE_RELEASE, {
+                slotId: payload.slotId,
+                slotName: payload.slotName,
+                message: 'Waktu booking habis.'
+             });
+         }
       }
     }
 
     if (channel === CHANNELS.REDIS.STATS) {
-      io.emit(CHANNELS.SOCKET.STATS_UPDATE, payload);
+
+      if (payload.areaId && payload.areaId !== 'GLOBAL') {
+          io.to(`area_${payload.areaId}`).emit(CHANNELS.SOCKET.STATS_UPDATE, payload.stats);
+      } else {
+          io.emit(CHANNELS.SOCKET.STATS_UPDATE, payload); 
+      }
     }
 
   } catch (err) {
