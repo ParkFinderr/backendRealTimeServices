@@ -5,7 +5,8 @@ const getMqttCommand = (action) => {
   switch (action) {
     case 'reserveSlot': return CHANNELS.MQTT.PAYLOAD.RESERVED;
     case 'occupySlot': return CHANNELS.MQTT.PAYLOAD.OCCUPIED;
-    case 'leaveSlot': 
+    case 'leaveSlot':
+    case 'freeSlot':
     case 'cancelSlot': return CHANNELS.MQTT.PAYLOAD.AVAILABLE;
     case 'maintenanceSlot': return CHANNELS.MQTT.PAYLOAD.MAINTENANCE;
     case 'alertSlot': return CHANNELS.MQTT.PAYLOAD.ALERT;
