@@ -2,4 +2,4 @@
 
 **Sistem Smart Parking berbasis IoT dan Cloud Computing**
 
-[BACA DOKUMENTASI API DISINI](https://parkfinderealtimeservices.apidocumentation.com/)
+[BACA DOKUMENTASI REAL TIME SERVICES DISINI](https://parkfinderealtimeservices.apidocumentation.com/)
