@@ -18,7 +18,7 @@ const io = new Server(server, {
 
 app.get('/', (req, res) => {
   res.status(200).json({ 
-    message: 'ParkFinder Realtime Service Berjalan.....', 
+    message: 'ParkFinder Realtime Sedang Service Berjalan.....', 
     serverTime: new Date() 
   });
 });
