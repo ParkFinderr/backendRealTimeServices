@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
 
 const startServer = async () => {
   try {
-    console.log('Memulai realtime service...');
+    console.log('Memulai realtime service');
 
     const mqttClient = mqttService.connect();
     const redisSubscriber = await redisService.connectSubscriber();
