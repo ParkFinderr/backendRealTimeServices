@@ -18,14 +18,14 @@ const io = new Server(server, {
 
 app.get('/', (req, res) => {
   res.status(200).json({ 
-    message: 'ParkFinder Realtime Service Berjalan....', 
+    message: 'ParkFinder Realtime Service Berjalan', 
     serverTime: new Date() 
   });
 });
 
 const startServer = async () => {
   try {
-    console.log('Memulai realtime service...');
+    console.log('Memulai realtime service....');
 
     const mqttClient = mqttService.connect();
     const redisSubscriber = await redisService.connectSubscriber();
