@@ -29,7 +29,7 @@ services:
     build: .
     container_name: parkfinderRealtime
     ports:
-      - "80:${PORT}"
+      - "${PORT}:${PORT}"
     
     env_file:
       - .env
