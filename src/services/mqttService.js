@@ -5,21 +5,20 @@ let client = null;
 
 const connect = () => {
   const host = process.env.MQTT_HOST;
-  const port = process.env.MQTT_PORT || 1883; 
-  const username = process.env.MQTT_USERNAME; 
-  const password = process.env.MQTT_PASSWORD; 
-
-  let url = `mqtt://${host}:${port}`;
+  const port = process.env.MQTT_PORT || 1883;
   
-  const options = {
-      username: username,
-      password: password,
-      reconnectPeriod: 1000,
-  };
+  const username = process.env.MQTT_USERNAME;
+  const password = process.env.MQTT_PASSWORD;
 
+  const url = `mqtt://${host}:${port}`;
+  
   console.log(`[MQTT] Menghubungkan ke ${host}...`);
   
-  client = mqtt.connect(url, options);
+  client = mqtt.connect(url, {
+      username: username,
+      password: password,
+      reconnectPeriod: 2000
+  });
 
   client.on('connect', () => {
     console.log(`[MQTT] Terhubung`);
@@ -27,10 +26,6 @@ const connect = () => {
 
   client.on('error', (err) => {
     console.error('[MQTT] Error:', err.message);
-  });
-  
-  client.on('offline', () => {
-    console.log('[MQTT] Offline/Putus');
   });
 
   return client;
