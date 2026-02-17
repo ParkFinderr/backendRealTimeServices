@@ -2,9 +2,8 @@ node_modules
 package-lock.json
 .env
 
-mosquitto\data\mosquitto.db
-redis\data\dump.rdb
-redis\data\appendonlydir\appendonly.aof.manifest
+mosquitto/data/*
+redis/data/*
 
 parkfinder_fix
 parkfinder_fix.pub
