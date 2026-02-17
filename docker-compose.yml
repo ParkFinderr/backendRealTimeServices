@@ -11,7 +11,7 @@ services:
       - ./mosquitto/config:/mosquitto/config
       - ./mosquitto/data:/mosquitto/data
       - ./mosquitto/log:/mosquitto/log
-    restart: unless-stopped
+    restart: always
 
   redis:
     image: redis:alpine
@@ -20,8 +20,10 @@ services:
       - "6379:6379"
     volumes:
       - ./redis/data:/data
-    command: redis-server --appendonly yes
-    restart: unless-stopped
+    command: /bin/sh -c "redis-server --appendonly yes --requirepass $${REDIS_PASSWORD}"
+    restart: always
+    environment:
+     - REDIS_PASSWORD=${REDIS_PASSWORD}
 
   app:
     build: .
@@ -31,16 +33,21 @@ services:
     
     env_file:
       - .env
-    command: npm run dev
-    volumes:
-      - .:/app
-      - /app/node_modules
+    restart: always
+
+    # --- KONFIGURASI LOCAL DEV
+    # command: npm run dev
+    # volumes:
+    #   - .:/app
+    #   - /app/node_modules
+
     environment:
       - PORT=${PORT}
       - MQTT_HOST=mqtt 
       - REDIS_HOST=redis
+      - REDIS_PASSWORD=${REDIS_PASSWORD} 
+      - NODE_ENV=production
     
     depends_on:
       - mqtt
       - redis
-    restart: always
