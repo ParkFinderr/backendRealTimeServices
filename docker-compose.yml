@@ -6,7 +6,7 @@ services:
     container_name: parkfinderMqtt
     ports:
       - "1883:1883"
-      - "9001:9001"
+      - "9001:9001" 
     volumes:
       - ./mosquitto/config:/mosquitto/config
       - ./mosquitto/data:/mosquitto/data
@@ -16,14 +16,12 @@ services:
   redis:
     image: redis:alpine
     container_name: parkfinderRedis
-    ports:
-      - "6379:6379"
     volumes:
       - ./redis/data:/data
     command: /bin/sh -c "redis-server --bind 0.0.0.0 --appendonly yes --requirepass $${REDIS_PASSWORD}"
     restart: always
     environment:
-     - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_PASSWORD=${REDIS_PASSWORD} 
 
   app:
     build: .
@@ -31,16 +29,8 @@ services:
     ports:
       - "${PORT}:${PORT}"
     env_file:
-      - .env
+      - .env 
     restart: always
-    environment:
-      - PORT=${PORT}
-      - MQTT_HOST=mqtt
-      - MQTT_USERNAME=${MQTT_USERNAME}
-      - MQTT_PASSWORD=${MQTT_PASSWORD}
-      - REDIS_HOST=redis
-      - REDIS_PASSWORD=${REDIS_PASSWORD}
-      - NODE_ENV=production
     depends_on:
       - mqtt
       - redis

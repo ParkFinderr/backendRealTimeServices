@@ -25,7 +25,27 @@ jobs:
             git fetch origin
             git checkout deployment
             git reset --hard origin/deployment
-            echo "🚀 Restarting Docker Containers with Sudo..."
+            
+            echo "Membangun file .env Production dari GitHub Secrets..."
+            
+            echo "PORT=${{ secrets.PROD_PORT }}" > .env
+            
+            # Gunakan tanda '>>' untuk menambahkan baris baru ke bawahnya
+            echo "MQTT_HOST=mqtt" >> .env
+            echo "MQTT_PORT=${{ secrets.PROD_MQTT_PORT }}" >> .env
+            echo "MQTT_USERNAME=${{ secrets.PROD_MQTT_USERNAME }}" >> .env
+            echo "MQTT_PASSWORD=${{ secrets.PROD_MQTT_PASSWORD }}" >> .env
+            
+            echo "" >> .env
+            
+            echo "REDIS_HOST=redis" >> .env
+            echo "REDIS_PORT=${{ secrets.PROD_REDIS_PORT }}" >> .env
+            echo "REDIS_PASSWORD=${{ secrets.PROD_REDIS_PASSWORD }}" >> .env
+            echo "NODE_ENV=production" >> .env
+            
+            echo " ile .env berhasil dibuat."
+            
+            echo "Restarting Docker Containers with Sudo..."
             sudo docker-compose down
             sudo docker-compose up -d --build
             sudo docker image prune -f
